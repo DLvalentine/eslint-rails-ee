@@ -8,6 +8,7 @@ Issues I hope to resolve with this fork
 2. Addition/Usage of eslint flags (like `--fix`)
 3. Change conditions that would "break" a build using rake -- errors should break it, not warnings
 4. before_action/before_filter.... something needs to be done there to support multiple versions of rails. :( 
+4.5 with that consideration, perhaps fork eslint-rails and don't PR back in. split off eslint-rails4-ee and eslint-rails5-ee with proper licensing and shoutouts.
 
 [end temp]
 
