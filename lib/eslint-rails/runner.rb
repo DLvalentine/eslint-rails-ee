@@ -74,7 +74,7 @@ module ESLintRails
           return new eslint().verifyAndFix('#{escape_javascript(file_content)}', #{Config.read});
         }()
         JS
-        puts hsh
+        @output = hsh['output']
         hsh['messages']
       end
     end
@@ -83,9 +83,11 @@ module ESLintRails
       relative_path = asset.relative_path_from(Pathname.new(Dir.pwd))
       file_content = asset.read
 
+      puts file_content
+
       warning_hashes(file_content, should_autocorrect).map do |hash|
-        puts hash
-        ESLintRails::Warning.new(relative_path, hash, should_autocorrect=false)
+        File.write(relative_path, @output) if !@output.nil?
+        ESLintRails::Warning.new(relative_path, hash)
       end
     end
 

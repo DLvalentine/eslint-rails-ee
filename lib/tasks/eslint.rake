@@ -11,7 +11,7 @@ namespace :eslint do
       exit 0
     else
       formatter = ESLintRails::TextFormatter.new(warnings)
-      formatter.format
+      formatter.format(should_autocorrect)
       exit 1
     end
   end
@@ -27,9 +27,9 @@ namespace :eslint do
     formatted_should_autocorrect = ['true'].include?(args[:should_autocorrect]) ? true : false
     run_all_args = {
       should_autocorrect: formatted_should_autocorrect,
-      filename: nil
+      filename: 'application'
     }
-    run_and_print_results(run_all_args) # Run all
+    run_and_print_results(run_all_args[:filename], run_all_args[:should_autocorrect]) # Run all
   end
 
   desc 'Print the current configuration file (Uses local config/eslint.json if it exists; uses default config/eslint.json if it does not; optionally force default by passing a parameter)'

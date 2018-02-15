@@ -8,7 +8,7 @@ module ESLintRails
       @warnings = warnings
     end
 
-    def format
+    def format(should_autocorrect=false)
       max_line_column_length = max_length_of_attribute(:location)
       max_rule_id_length = max_length_of_attribute(:rule_id)
       max_message_length = max_length_of_attribute(:message)
@@ -31,7 +31,7 @@ module ESLintRails
         puts colorized_message
       end
 
-      puts "#{@warnings.size} warning(s) found."
+      puts "#{@warnings.size} warning(s) found #{should_autocorrect ? 'after auto-correcting some issues' : ''}"
     end
 
     private
