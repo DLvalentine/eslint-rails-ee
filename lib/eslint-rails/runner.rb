@@ -10,9 +10,9 @@ module ESLintRails
       @file = normalize_infile(file)
     end
 
-    def run
+    def run(should_autocorrect=false)
       warnings = assets.map do |asset|
-        generate_warnings(asset).tap { |warnings| output_progress(warnings) }
+        generate_warnings(asset, should_autocorrect).tap { |warnings| output_progress(warnings) }
       end
 
       puts
@@ -55,23 +55,35 @@ module ESLintRails
       JSON.parse(Config.read)['plugins'] || []
     end
 
-    def warning_hashes(file_content)
-      ExecJS.eval <<-JS
+    def warning_hashes(file_content, should_autocorrect=false)
+      if !should_autocorrect
+        ExecJS.eval <<-JS
+          function () {
+            window = this;
+            #{eslint_js};
+            #{eslint_plugin_js};
+            return new eslint().verify('#{escape_javascript(file_content)}', #{Config.read});
+          }()
+        JS
+      else
+        ExecJS.eval <<-JS
         function () {
           window = this;
           #{eslint_js};
           #{eslint_plugin_js};
-          return eslint.verify('#{escape_javascript(file_content)}', #{Config.read});
+          new eslint().verifyAndFix('#{escape_javascript(file_content)}', #{Config.read});
+          return new eslint().verify('#{escape_javascript(file_content)}', #{Config.read});
         }()
-      JS
+        JS
+      end
     end
 
-    def generate_warnings(asset)
+    def generate_warnings(asset, should_autocorrect=false)
       relative_path = asset.relative_path_from(Pathname.new(Dir.pwd))
       file_content = asset.read
 
-      warning_hashes(file_content).map do |hash|
-        ESLintRails::Warning.new(relative_path, hash)
+      warning_hashes(file_content, should_autocorrect).map do |hash|
+        ESLintRails::Warning.new(relative_path, hash, should_autocorrect=false)
       end
     end
 

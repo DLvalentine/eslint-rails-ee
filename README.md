@@ -144,7 +144,7 @@ npm install
 
 ```sh
 cd $ESLINT
-shjs Makefile.js browserify
+node Makefile.js browserify
 ```
 
 #### Copy `eslint.js` into `eslint-rails`

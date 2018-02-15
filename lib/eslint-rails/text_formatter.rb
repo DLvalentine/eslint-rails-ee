@@ -26,7 +26,7 @@ module ESLintRails
           when :high
             message.yellow
           else
-            raise 'BULLSHIT'
+            #raise 'BULLSHIT'
           end
         puts colorized_message
       end

@@ -5,7 +5,7 @@ module ESLintRails
     SEVERITY = [ :low, :high ].freeze
     private_constant :SEVERITY
 
-    def initialize(filename, warning_hash)
+    def initialize(filename, warning_hash, should_autocorrect=false)
       @filename = filename
       @rule_id = warning_hash['ruleId'] || "unexpected error"
       @severity = warning_hash['severity']

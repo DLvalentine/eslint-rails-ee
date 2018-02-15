@@ -1,6 +1,6 @@
 class EslintController < ActionController::Base
 
-  before_filter :set_filename
+  before_action :set_filename
 
   def show
     @warnings = ESLintRails::Runner.new(@filename).run
@@ -11,7 +11,7 @@ class EslintController < ActionController::Base
   end
 
   def config_file
-    render json: ESLintRails::Config.read(force_default: params[:force_default])
+    render json: ESLintRails::Config.read(force_default: params[:force_default] || false)
   end
 
   private
