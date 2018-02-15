@@ -1,10 +1,14 @@
 # eslint-rails
 
 [begin temp]
+
 Issues I hope to resolve with this fork
 
 1. `/eslint/eslint.json` route is broken unless you provide the `force_default` param, which isn't always desired
 2. Addition/Usage of eslint flags (like `--fix`)
+3. Change conditions that would "break" a build using rake -- errors should break it, not warnings
+4. before_action/before_filter.... something needs to be done there to support multiple versions of rails. :( 
+
 [end temp]
 
 Run [ESLint][] against your Rails repo. The supported javascript file extensions are the following:
