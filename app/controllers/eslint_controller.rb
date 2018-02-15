@@ -1,9 +1,9 @@
 class EslintController < ActionController::Base
 
-  before_action :set_filename
+  before_action :set_options
 
   def show
-    @warnings = ESLintRails::Runner.new(@filename).run
+    @warnings = ESLintRails::Runner.new(@filename).run(@should_autocorrect)
   end
 
   def source
@@ -16,7 +16,8 @@ class EslintController < ActionController::Base
 
   private
 
-  def set_filename
+  def set_options
     @filename = params[:filename] || 'application'
+    @should_autocorrect = ['true'].include?(params[:should_autocorrect]) ? true : false
   end
 end

@@ -66,15 +66,16 @@ module ESLintRails
           }()
         JS
       else
-        ExecJS.eval <<-JS
+        hsh = ExecJS.eval <<-JS
         function () {
           window = this;
           #{eslint_js};
           #{eslint_plugin_js};
-          new eslint().verifyAndFix('#{escape_javascript(file_content)}', #{Config.read});
-          return new eslint().verify('#{escape_javascript(file_content)}', #{Config.read});
+          return new eslint().verifyAndFix('#{escape_javascript(file_content)}', #{Config.read});
         }()
         JS
+        puts hsh
+        hsh['messages']
       end
     end
 
@@ -83,6 +84,7 @@ module ESLintRails
       file_content = asset.read
 
       warning_hashes(file_content, should_autocorrect).map do |hash|
+        puts hash
         ESLintRails::Warning.new(relative_path, hash, should_autocorrect=false)
       end
     end

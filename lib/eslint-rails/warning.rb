@@ -6,13 +6,24 @@ module ESLintRails
     private_constant :SEVERITY
 
     def initialize(filename, warning_hash, should_autocorrect=false)
+      puts warning_hash
+      puts filename
       @filename = filename
-      @rule_id = warning_hash['ruleId'] || "unexpected error"
-      @severity = warning_hash['severity']
-      @message = warning_hash['message']
-      @line = warning_hash['line']
-      @column = warning_hash['column']
-      @node_type = warning_hash['nodeType']
+      if should_autocorrect
+        @rule_id = warning_hash['messages']['ruleId'] || "unexpected error"
+        @severity = warning_hash['messages']['severity']
+        @message = warning_hash['messages']['message']
+        @line = warning_hash['messages']['line']
+        @column = warning_hash['messages']['column']
+        @node_type = warning_hash['messages']['nodeType']
+      else
+        @rule_id = warning_hash['ruleId'] || "unexpected error"
+        @severity = warning_hash['severity']
+        @message = warning_hash['message']
+        @line = warning_hash['line']
+        @column = warning_hash['column']
+        @node_type = warning_hash['nodeType']
+      end
     end
 
     def severity
