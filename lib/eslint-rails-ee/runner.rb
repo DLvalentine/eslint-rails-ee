@@ -7,8 +7,7 @@ module ESLintRails
     JAVASCRIPT_EXTENSIONS = %w(.js .jsx .es6)
 
     def initialize(file)
-      @file   = normalize_infile(file)
-      @output = nil
+      @file = normalize_infile(file)
     end
 
     def run(should_autocorrect=false)
@@ -56,7 +55,7 @@ module ESLintRails
       JSON.parse(Config.read)['plugins'] || []
     end
 
-    def warning_hashes(file_content, should_autocorrect=false)
+    def warning_hashes(file_content, relative_path, should_autocorrect=false)
       if !should_autocorrect
         ExecJS.eval <<-JS
           function () {
@@ -75,17 +74,16 @@ module ESLintRails
           return new eslint().verifyAndFix('#{escape_javascript(file_content)}', #{Config.read});
         }()
         JS
-        @output = hsh['output']
+        File.write(relative_path, hsh['output']) if !hsh['output'].nil?
         hsh['messages']
       end
     end
 
     def generate_warnings(asset, should_autocorrect=false)
       relative_path = asset.relative_path_from(Pathname.new(Dir.pwd))
-      file_content = asset.read
+      file_content  = asset.read
 
-      warning_hashes(file_content, should_autocorrect).map do |hash|
-        File.write(relative_path, @output) if !@output.nil?
+      warning_hashes(file_content, relative_path, should_autocorrect).map do |hash|
         ESLintRails::Warning.new(relative_path, hash)
       end
     end
