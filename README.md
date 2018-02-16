@@ -18,13 +18,14 @@ gem 'therubyracer'
 gem 'execjs'
 ```
 
-This uses TheRubyRacer as a runtime. For most environments, this works fine. However if you run windows do this to your gemfile:
+This uses TheRubyRacer as a runtime. For most environments, this works fine. However if you run your application on Windows do this to your gemfile:
 
 ```ruby
 gem 'eslint-rails-ee'
 gem 'therubyracer', :platforms => :ruby
 gem 'execjs'
 ```
+This is due to libv8 not having a "proper" Windows-compatible release.
 
 ## Configuration
 
