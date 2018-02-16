@@ -1,5 +1,7 @@
 # eslint-rails-ee: a fork of eslint-rails with enhanced features
 
+#### Due to the original repo not being maintained, and several PRs/issues still being open after two years, I have decided to fork and keep this repo separated. Please send any requests, concerns, etc to dvaidlewisrogers3@gmail.com -- I would be more than happy to merge these new features into the original repo.
+
 Run [ESLint][] against your Rails repo, and even auto-correct issues! The supported javascript file extensions are the following:
 
 - _.js_
