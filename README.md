@@ -12,6 +12,16 @@ Add this line to your application's Gemfile:
 
 ```ruby
 gem 'eslint-rails-ee'
+gem 'therubyracer'
+gem 'execjs'
+```
+
+This uses TheRubyRacer as a runtime. For most environments, this works fine. However if you run windows do this to your gemfile:
+
+```ruby
+gem 'eslint-rails-ee'
+gem 'therubyracer', :platforms => :ruby
+gem 'execjs'
 ```
 
 ## Configuration

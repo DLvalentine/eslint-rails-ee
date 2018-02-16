@@ -7,7 +7,8 @@ module ESLintRails
     JAVASCRIPT_EXTENSIONS = %w(.js .jsx .es6)
 
     def initialize(file)
-      @file = normalize_infile(file)
+      @file   = normalize_infile(file)
+      @output = nil
     end
 
     def run(should_autocorrect=false)
