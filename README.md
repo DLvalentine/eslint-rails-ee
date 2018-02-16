@@ -110,7 +110,7 @@ start.
 
 ```sh
 ESLINT=~/src/eslint
-ESLINT_RAILS=~/src/eslint-rails
+ESLINT_RAILS=~/src/eslint-rails-ee
 ```
 
 ## Cloning the repository
