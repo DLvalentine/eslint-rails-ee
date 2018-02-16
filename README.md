@@ -1,18 +1,6 @@
-# eslint-rails
+# eslint-rails-ee: a fork of eslint-rails with enhanced features
 
-[begin temp]
-
-Issues I hope to resolve with this fork
-
-1. `/eslint/eslint.json` route is broken unless you provide the `force_default` param, which isn't always desired
-2. Addition/Usage of eslint flags (like `--fix`)
-3. Change conditions that would "break" a build using rake -- errors should break it, not warnings
-4. before_action/before_filter.... something needs to be done there to support multiple versions of rails. :( 
-4.5 with that consideration, perhaps fork eslint-rails and don't PR back in. split off eslint-rails4-ee and eslint-rails5-ee with proper licensing and shoutouts.
-
-[end temp]
-
-Run [ESLint][] against your Rails repo. The supported javascript file extensions are the following:
+Run [ESLint][] against your Rails repo, and even auto-correct issues! The supported javascript file extensions are the following:
 
 - _.js_
 - _.jsx_
@@ -23,7 +11,7 @@ Run [ESLint][] against your Rails repo. The supported javascript file extensions
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'eslint-rails'
+gem 'eslint-rails-ee'
 ```
 
 ## Configuration
@@ -73,6 +61,17 @@ rake eslint:run[app/assets/javascripts/components/utilities]
 rake eslint:run[app/assets/javascripts/components/utilities.js]
 ```
 
+To auto-correct files in either execution of the above rake tasks just add `true` to the arguments like so:
+
+```sh
+rake eslint:run_all[true]
+```
+or
+
+```sh
+rake eslint:run[test.js,true]
+```
+
 ### Web interface
 
 On non-production environments, visit these URLs on your application:
@@ -80,7 +79,9 @@ On non-production environments, visit these URLs on your application:
 Path                                  | Description
 ------------------------------------- | -------------------------------------------------
 `/eslint`                             | Optionally supply a filename parameter to analyze a file other than `application.js`, e.g.  `/eslint?filename=foo` to analyze foo.js.
-`/eslint/source?filename=application` | Optionally replace `application` with the name of another JavaScript file, e.g.  `eslint/source?filename=button_stuff` can show you `button_stuff.js`, and `eslint/source?filename=components/buttons/icon_button` can show you `components/buttons/icon_button.js.coffee.erb`.
+`/eslint/source?filename=application` | Optionally replace `application` with the name of another JavaScript file, e.g.  `eslint/source?filename=button_stuff` can show you `button_stuff.js`, and `eslint/source?filename=components/buttons/icon_button` can show you `components/buttons/icon_button.js.coffee.erb`. This returns the source code with syntax highlighting
+`/eslint?filename=<path+filename>`    | Providing you give a correct path/filename, it will run the eslint report and show you the errors
+`/eslint?filename=<path+filename>&should_autocorrect=true` | Same as above, but will report errors AFTER auto-correcting any auto-correct-able issues
 
 ![eslint-rails-web][]
 
@@ -103,7 +104,7 @@ ESLINT_RAILS=~/src/eslint-rails
 ## Cloning the repository
 
 ```sh
-git clone https://github.com/appfolio/eslint-rails $ESLINT_RAILS
+git clone https://github.com/appfolio/eslint-rails-ee $ESLINT_RAILS
 ```
 
 ## Updating ESLint version
@@ -175,8 +176,16 @@ git commit
 git push origin master
 # Open a pull request
 ```
+# Fork Authors
 
-# Authors
+Since the original repo lacked some features I wanted and hasn't seen support/PRs in over a year, I decided to make this repo. Future maintenance of this gem will exist in 
+the new eslint-rails-ee repo: 
+
+- David Valentine &lt;[davidlewisrogers3@gmail.com][]&gt;
+
+# Original Authors
+
+This repo was orignially written by the following people:
 
 - Jon Kessler &lt;[jon.kessler@appfolio.com][]&gt;
 - Justin Force &lt;[justin.force@appfolio.com][]&gt;

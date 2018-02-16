@@ -12,7 +12,7 @@
 <body>
   <div class="container">
     <h1>
-      ESLint Report
+      ESLint Report <%= "(after auto-corrections)" if params[:should_autocorrect] %>
       <small>
         <%= link_to 'eslint.json', config_file_path %>
       </small>

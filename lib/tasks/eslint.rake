@@ -1,17 +1,32 @@
 ENV['EXECJS_RUNTIME'] = 'RubyRacer'
 
-require 'eslint-rails'
+require 'eslint-rails-ee'
 
 namespace :eslint do
   def run_and_print_results(file, should_autocorrect=false)
-    warnings = ESLintRails::Runner.new(file).run(should_autocorrect)
+    warnings   = ESLintRails::Runner.new(file).run(should_autocorrect)
+    raiseError = false
+
+    warnings.each do |warning|
+      next if warning.severity.nil?
+      if warning.severity.to_s.casecmp('high').zero?
+        raiseError = true
+        break
+      end 
+    end
 
     if warnings.empty?
-      puts 'All good! :)'.green
+      puts 'All good! Any issues that might have existed may have been auto-corrected :)'.green
+      exit 0
+    elsif !raiseError
+      formatter = ESLintRails::TextFormatter.new(warnings)
+      puts formatter.format(should_autocorrect)
+      puts 'Minor issues exist, but your eslint.json lets them fly. Might want to fix them up before release. :/'.yellow
       exit 0
     else
       formatter = ESLintRails::TextFormatter.new(warnings)
-      formatter.format(should_autocorrect)
+      puts formatter.format(should_autocorrect)
+      puts 'Major issues exist, according to eslint.json. You MUST correct these issues before release :('.red
       exit 1
     end
   end
@@ -25,11 +40,7 @@ namespace :eslint do
   desc 'Run ESLint against all project javascript files and report warnings'
   task :run_all, [:should_autocorrect] => :environment do |_, args|
     formatted_should_autocorrect = ['true'].include?(args[:should_autocorrect]) ? true : false
-    run_all_args = {
-      should_autocorrect: formatted_should_autocorrect,
-      filename: 'application'
-    }
-    run_and_print_results(run_all_args[:filename], run_all_args[:should_autocorrect]) # Run all
+    run_and_print_results(nil, formatted_should_autocorrect) # Run all
   end
 
   desc 'Print the current configuration file (Uses local config/eslint.json if it exists; uses default config/eslint.json if it does not; optionally force default by passing a parameter)'
