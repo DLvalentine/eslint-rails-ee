@@ -16,17 +16,17 @@ namespace :eslint do
     end
 
     if warnings.empty?
-      puts 'All files passed! Any issues that might have existed may have been auto-corrected :)'.green
+      puts 'All files passed! :)'.green
       exit 0
     elsif !raiseError
       formatter = ESLintRails::TextFormatter.new(warnings)
       puts formatter.format(should_autocorrect)
-      puts 'eslint reports some warnings, but they are minor enough to be passable. Might want to fix them up before release, though. :/'.yellow
+      puts 'ESlint reports some warnings, but they are minor enough to be passable. Might want to fix them up before release, though. :/'.yellow
       exit 0
     else
       formatter = ESLintRails::TextFormatter.new(warnings)
       puts formatter.format(should_autocorrect)
-      puts 'Major issues exist according to provided eslint rules. You *MUST* git gud and correct these issues before release :('.red
+      puts 'Major issues exist according to provided ESlint rules. You *MUST* correct these issues before release :('.red
       exit 1
     end
   end
