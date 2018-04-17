@@ -4,17 +4,22 @@ module ESLintRails
   class Runner
     include ActionView::Helpers::JavaScriptHelper
 
-    JAVASCRIPT_EXTENSIONS = %w(.js .jsx .es6)
+    JAVASCRIPT_EXTENSIONS = %w[.js .jsx .es6].freeze
 
     def initialize(file)
-      @file = normalize_infile(file)
+      @file   = normalize_infile(file)
+      @assets = assets
+      puts "Running ESLint | [#{@assets.size } file(s)]".white.on_black.italic
+      print 'Progress: ['.white.on_black
     end
 
     def run(should_autocorrect=false)
-      warnings = assets.map do |asset|
+      warnings = @assets.map do |asset|
         generate_warnings(asset, should_autocorrect).tap { |warnings| output_progress(warnings) }
       end
 
+      print "]".white.on_black
+      puts
       puts
 
       warnings.flatten
@@ -91,11 +96,11 @@ module ESLintRails
     def output_progress(warnings)
       print case file_severity(warnings)
             when :high
-              'H'.red
+              '!'.red.on_black.blink
             when :low
-              'L'.yellow
+              '?'.yellow.on_black.italic
             else
-              '.'.green
+              '='.green.on_black
             end
     end
 

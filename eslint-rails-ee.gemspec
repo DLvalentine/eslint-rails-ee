@@ -1,14 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
 require 'eslint-rails-ee/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'eslint-rails-ee'
   spec.version       = ESLintRails::VERSION
-  spec.authors       = ['Justin Force', 'Jon Kessler', 'David Valentine']
-  spec.email         = ['justin.force@appfolio.com', 'jon.kessler@appfolio.com', 'davidlewisrogers3@gmail.com']
-  spec.summary       = %q{A Rails wrapper for ESLint, but ENHANCED!}
+  spec.authors       = ['David Valentine', 'Justin Force', 'Jon Kessler']
+  spec.email         = ['davidlewisrogers3@gmail.com', 'justin.force@appfolio.com', 'jon.kessler@appfolio.com']
+  spec.summary       = %q{A Rails wrapper for ESLint}
   spec.description   = spec.summary
   spec.homepage      = 'https://github.com/dlvalentine/eslint-rails-ee'
   spec.license       = 'MIT'
