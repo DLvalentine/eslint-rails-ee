@@ -1,6 +1,6 @@
-# eslint-rails-ee: a fork of eslint-rails with enhanced features
+# eslint-rails-ee: the more active fork of [eslint-rails](https://github.com/appfolio/eslint-rails)
 
-#### Due to the original repo not being actively worked on since last year, and several PRs/issues still being open (some even after two years), I have decided to fork and keep this repo separated. Please send any requests, concerns, etc to dvaidlewisrogers3@gmail.com -- I would be more than happy to merge these new features into the original repo. Big shout out and thank you to the original authors for creating an awesome gem.
+#### Big shoutout to the original authors of this gem, for their awesome contribution to the more JS-leaning Rails devs of the world!
 
 Run [ESLint][] against your Rails repo, and even auto-correct issues! The supported javascript file extensions are the following:
 
@@ -25,7 +25,6 @@ gem 'eslint-rails-ee'
 gem 'therubyracer', :platforms => :ruby
 gem 'execjs'
 ```
-This is due to libv8 not having a "proper" Windows-compatible release.
 
 ## Configuration
 
