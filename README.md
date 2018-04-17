@@ -1,3 +1,6 @@
+[![Gem Version](https://badge.fury.io/rb/eslint-rails-ee.svg)](https://badge.fury.io/rb/eslint-rails-ee)
+[![RamenBless](https://cdn.rawgit.com/LunaGao/BlessYourCodeTag/master/tags/ramen.svg)](https://github.com/LunaGao/BlessYourCodeTag)
+
 # eslint-rails-ee: the more active fork of [eslint-rails](https://github.com/appfolio/eslint-rails)
 
 #### Big shoutout to the original authors of this gem, for their awesome contribution to the more JS-leaning Rails devs of the world!
