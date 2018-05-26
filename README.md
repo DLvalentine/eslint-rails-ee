@@ -214,7 +214,8 @@ This repo was orignially written by the following people:
 [ESLint repository]: https://github.com/eslint/eslint
 [justin.force@appfolio.com]: mailto:justin.force@appfolio.com
 [jon.kessler@appfolio.com]: mailto:jon.kessler@appfolio.com
-[MIT License]: http://www.opensource.org/licenses/MIT)
+[MIT License]: http://www.opensource.org/licenses/MIT
+[davidlewisrogers3@gmail.com]: mailto:davidlewisrogers3@gmail.com
 
 [rake-eslint-rails-run]: https://cloud.githubusercontent.com/assets/324632/6672146/9d1f278e-cbc7-11e4-9f56-5a4511d35921.png
 [eslint-rails-web-source]: https://cloud.githubusercontent.com/assets/324632/6671965/33d6819c-cbc6-11e4-9a64-30be84f20b96.png
