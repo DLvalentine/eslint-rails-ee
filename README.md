@@ -119,7 +119,7 @@ ESLINT_RAILS=~/src/eslint-rails-ee
 ## Cloning the repository
 
 ```sh
-git clone https://github.com/appfolio/eslint-rails-ee $ESLINT_RAILS
+git clone https://github.com/DLvalentine/eslint-rails-ee $ESLINT_RAILS
 ```
 
 ## Updating ESLint version
